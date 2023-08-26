@@ -32,6 +32,7 @@ const Questions = ({nome, setCount, setTabs, count}: ModalProps) => {
 		if (index === questions[currentQuestion].respostaCorreta) {
 			setCount(count + 1);
 			setSelectedAnswer(index);
+
 			return;
 		}
 	};
@@ -45,7 +46,6 @@ const Questions = ({nome, setCount, setTabs, count}: ModalProps) => {
 		setSelectedAnswer('');
 		setCurrentQuestion(currentQuestion + 1);
 	};
-
 	return (
 		<S.Container>
 			<S.TitleName>Bem vindo(a) {nome} ao Quiz CFW</S.TitleName>
@@ -62,6 +62,11 @@ const Questions = ({nome, setCount, setTabs, count}: ModalProps) => {
 						key={index}
 						disabled={selectedAnswer !== ''}
 						correct={selectedAnswer === index}
+						incorrect={
+							selectedAnswer !== '' &&
+							selectedAnswer === index &&
+							index !== questions[currentQuestion].respostaCorreta
+						}
 					>
 						{resposta}
 					</S.ButtonOptions>
@@ -76,7 +81,11 @@ const Questions = ({nome, setCount, setTabs, count}: ModalProps) => {
 					alignItems: 'center'
 				}}
 			>
-				<S.ButtonNext onClick={nextQuestion} label='Próxima Pergunta' />
+				<S.ButtonNext
+					onClick={nextQuestion}
+					label='Próxima Pergunta'
+					disabled={selectedAnswer === ''}
+				/>
 			</div>
 		</S.Container>
 	);

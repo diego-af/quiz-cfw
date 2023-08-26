@@ -14,13 +14,16 @@ export const Container = styled.div`
 
 interface Props {
 	correct: boolean | string;
+	incorrect: boolean | string;
 	disabled: boolean | string;
 }
 
 export const ButtonOptions = styled.button<Props>`
 	width: 100%;
 	max-width: 30rem;
-	background-color: ${(props) => (props.correct ? 'green' : '#70bc7c')};
+	background-color: #69a369;
+	background-color: ${(props) => props.correct && '#2e712e'};
+	background-color: ${(props) => props.incorrect && 'red'};
 	border-radius: 0.4rem;
 	border: ${(props) => (props.correct ? '1px solid purple' : 'white')};
 	padding: 0.5rem;
